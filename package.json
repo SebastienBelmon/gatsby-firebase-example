@@ -1,0 +1,24 @@
+{
+  "name": "gatsby-starter-hello-world",
+  "description": "Gatsby hello world starter",
+  "license": "MIT",
+  "scripts": {
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "format": "prettier --trailing-comma es5 --single-quote --write \"src/**/*.js\""
+  },
+  "dependencies": {
+    "firebase": "^4.10.1",
+    "fs": "^0.0.1-security",
+    "gatsby": "^1.9.231",
+    "gatsby-link": "^1.6.38",
+    "gatsby-plugin-glamor": "^1.6.13",
+    "gatsby-plugin-typography": "^1.7.18",
+    "typography-theme-fairy-gates": "^0.15.11"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": ""
+}

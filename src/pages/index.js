@@ -26,7 +26,7 @@ export default class Home extends Component {
     this.setState({
       email: '',
       password: '',
-    })
+    });
   }
 
   handleChange(e) {
@@ -80,7 +80,9 @@ export default class Home extends Component {
           ) : (
             <button onClick={this.handleLogin}>LogIn</button>
           )}
-          <button onClick={() => this.setState({ isSignUp: !isSignUp })}>Toggle</button>
+          <button onClick={() => this.setState({ isSignUp: !isSignUp })}>
+            Toggle
+          </button>
         </form>
       </div>
     );

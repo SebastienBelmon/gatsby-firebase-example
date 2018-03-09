@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
 
-export default class Index extends Component {
+import withAuth from '../hoc/withAuth.js';
+
+class Index extends Component {
   render() {
     const { children } = this.props;
     return (
@@ -62,3 +64,5 @@ export default class Index extends Component {
     );
   }
 }
+
+export default withAuth(Index);

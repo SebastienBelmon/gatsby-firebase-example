@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import { firebase } from '../utils/firebase';
+import { auth } from '../utils/firebase';
 
-export default class extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: '',
       password: '',
-      userEmail: '',
-    }
+      isSignUp: true,
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin() {
+    const { email, password } = this.state;
+
+    auth.signInWithEmailAndPassword(email, password);
+
+    this.setState({
+      email: '',
+      password: '',
+    })
   }
 
   handleChange(e) {
@@ -26,16 +39,23 @@ export default class extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const { email, password } = this.state;
-
-
   }
 
   render() {
-    const { email, password, userEmail } = this.state;
+    const { email, password, isSignUp } = this.state;
+    const { loggedUser } = this.context;
 
     return (
       <div>
-        {userEmail && <h3>Welcome ! You are logged with {userEmail}</h3>}
+        {loggedUser && (
+          <div>
+            <h3>Welcome ! You are logged with {loggedUser.email}</h3>
+            <button onClick={() => auth.signOut(loggedUser.email)}>
+              LogOut
+            </button>
+            <br />
+          </div>
+        )}
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>Email: </label>
@@ -55,11 +75,18 @@ export default class extends Component {
               value={password}
             />
           </div>
-          <button type="submit">Register</button>
+          {isSignUp ? (
+            <button type="submit">Register</button>
+          ) : (
+            <button onClick={this.handleLogin}>LogIn</button>
+          )}
+          <button onClick={() => this.setState({ isSignUp: !isSignUp })}>Toggle</button>
         </form>
-
-        <button onClick={() => this.getLoggedUser()}>user</button>
       </div>
     );
   }
 }
+
+Home.contextTypes = {
+  loggedUser: PropTypes.object,
+};
